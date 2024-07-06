@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:topenergy/controller/retrieve_controller.dart';
 import 'package:topenergy/controller/token_controller.dart';
+import 'package:topenergy/pages/auth/alt_create_pin.dart';
 import 'package:topenergy/pages/auth/alt_login.dart';
-import 'package:topenergy/pages/auth/create_pin.dart';
 import 'package:topenergy/widget/bottom_widget.dart';
 import 'package:topenergy/widget/custom_snackbar.dart';
 import 'package:http/http.dart' as http;
@@ -35,7 +35,8 @@ class OtpController extends GetxController {
       if (otpTextController == retrieveController.userDetails.value!.otpCode) {
         CustomSnackbar().showSuccessMessage("Success");
         if (isSignUp == true) {
-          Get.off(() => const CreatePinScreen());
+          // Get.off(() => const CreatePinScreen());
+          Get.offAll(()=> AltCreatePinScreen());
         } else {
           Get.off(() => const BottomNaviagtionScreen());
         }

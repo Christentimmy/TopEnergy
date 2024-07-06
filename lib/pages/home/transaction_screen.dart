@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 import 'package:topenergy/controller/transaction_controller.dart';
 import 'package:topenergy/model/transaction_model.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
@@ -365,16 +364,9 @@ class _TransactionPageState extends State<TransactionPage> {
               Obx(
                 () => _transactionController.transactionHistory.isEmpty
                     ? SizedBox(
-                        height: MediaQuery.of(context).size.height / 1.7,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Lottie.network(
-                              "https://app.lottiefiles.com/animation/502e0f27-7adf-44c3-821b-bd5c35f63a03",
-                            ),
-                            const Text("Transaction is Empty"),
-                          ],
-                        ),
+                        height: MediaQuery.of(context).size.height / 1.5,
+                        child:
+                            const Center(child: Text("Transaction is Empty")),
                       )
                     : Expanded(
                         child: ListView.builder(

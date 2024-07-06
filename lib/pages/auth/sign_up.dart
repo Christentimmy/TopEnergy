@@ -182,7 +182,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           }
                           if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]')
                               .hasMatch(value)) {
-                            return 'Password must contain at least one special character';
+                            return 'At least one special character';
                           }
                           return null;
                         },

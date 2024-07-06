@@ -215,6 +215,9 @@ class _CreatePinScreenState extends State<CreatePinScreen> {
                 ),
               ),
               const Spacer(),
+
+
+              
               GestureDetector(
                 onTap: () {
                   Get.to(() => const BottomNaviagtionScreen());

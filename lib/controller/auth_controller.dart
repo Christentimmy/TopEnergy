@@ -6,6 +6,7 @@ import 'package:topenergy/controller/retrieve_controller.dart';
 import 'package:topenergy/controller/token_controller.dart';
 import 'package:topenergy/controller/transaction_controller.dart';
 import 'package:topenergy/model/user_model.dart';
+import 'package:topenergy/pages/auth/alt_otp_screen.dart';
 import 'package:topenergy/pages/auth/otp_screen.dart';
 import 'package:topenergy/widget/bottom_widget.dart';
 import 'package:topenergy/widget/custom_snackbar.dart';
@@ -53,6 +54,8 @@ class AuthController extends GetxController {
       isloading.value = false;
     }
   }
+  
+  
   Future<void> signUpUser({
     required String fullName,
     required String email,
@@ -85,7 +88,7 @@ class AuthController extends GetxController {
       final transController = Get.find<TransactionController>();
       await controller.getUserDetails();
       await transController.getTransactionHistory();
-      Get.to(() => const OtpScreen(isSignUp: true));
+      Get.to(() => const AltOtpScreen(isSignUp: true));
     } catch (e) {
       debugPrint(e.toString());
     } finally {

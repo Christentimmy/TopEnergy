@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -7,12 +6,13 @@ import 'package:topenergy/controller/token_controller.dart';
 import 'package:topenergy/model/transaction_model.dart';
 import 'package:topenergy/model/verify_power.dart';
 import 'package:topenergy/pages/home/continue_purchase.dart';
+import 'package:topenergy/widget/bottom_widget.dart';
 import 'package:topenergy/widget/custom_snackbar.dart';
 
 class TransactionController extends GetxController {
   RxList<TransactionModel> transactionHistory = <TransactionModel>[].obs;
   RxBool isloading = false.obs;
-  String baseUrl = 'https://topenergy.ng';
+  String baseUrl = "https://topenergy.ng";
 
   Future<void> getTransactionHistory() async {
     isloading.value = true;
@@ -100,6 +100,35 @@ class TransactionController extends GetxController {
       print("Execution Time: ${stop.elapsed}");
     } catch (e) {
       debugPrint('Error making HTTP request: $e');
+    } finally {
+      isloading.value = false;
+    }
+  }
+
+  Future<void> createTransactionPin(String pinCode) async {
+    isloading.value = true;
+    try {
+      final token = await TokenStorage().getToken();
+      final response = await http.post(
+        Uri.parse(
+          "https://topenergy.ng/api/agent/set-pin",
+        ),
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode({
+          "pin": pinCode,
+        }),
+      );
+      final decoded = json.decode(response.body);
+      print(decoded);
+      if (decoded["status"] != true) {
+        return CustomSnackbar().showErrorMessage(decoded["responseMessage"]);
+      }
+      Get.to(() => const BottomNaviagtionScreen());
+    } catch (e) {
+      debugPrint(e.toString());
     } finally {
       isloading.value = false;
     }

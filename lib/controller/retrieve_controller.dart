@@ -3,12 +3,14 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:topenergy/controller/token_controller.dart';
+import 'package:topenergy/controller/transaction_controller.dart';
 import 'package:topenergy/model/retrieve_model.dart';
 import 'package:topenergy/widget/custom_snackbar.dart';
 
 
 class RetrieveController extends GetxController {
   final userDetails = Rx<RetrieveBody?>(null);
+  final _trans = Get.put(TransactionController());
   String baseUrl = "https://topenergy.ng";
 
   @override
@@ -44,6 +46,7 @@ class RetrieveController extends GetxController {
       var responseBody = decodedResponceBody["responseBody"];
       RetrieveBody user = RetrieveBody.fromJson(responseBody);
       userDetails.value = user;
+      await _trans.getTransactionHistory();
     } catch (e) {
       debugPrint('Error making HTTP request: $e');
     }

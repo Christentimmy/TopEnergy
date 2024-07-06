@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:topenergy/controller/retrieve_controller.dart';
+import 'package:topenergy/controller/token_controller.dart';
+import 'package:topenergy/widget/bottom_widget.dart';
 import '../../onboarding/onboarding.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -10,6 +13,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final _retrieveController = Get.put(RetrieveController());
   @override
   void initState() {
     navigate();
@@ -18,9 +22,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void navigate() async {
     await Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 2),() async{
+        final token = await TokenStorage().getToken();
+        if (token != null && token.isNotEmpty) {
+          await _retrieveController.getUserDetails();
+          Get.to(()=> const BottomNaviagtionScreen());
+        }else{
+          Get.to(()=> const OnboardingScreen());
+        }
+      },
     );
-    Get.off(() => const OnboardingScreen());
+  
   }
 
   @override
