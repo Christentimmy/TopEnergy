@@ -4,15 +4,36 @@ import 'package:topenergy/Resources/color.dart';
 import 'package:topenergy/controller/retrieve_controller.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final _retrieveController = Get.find<RetrieveController>();
+  TextEditingController _fullNameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _phoneNumberController = TextEditingController();
 
-   final _retrieveController = Get.find<RetrieveController>();
+  @override
+  void initState() {
+    super.initState();
+    _fullNameController = TextEditingController(
+        text: _retrieveController.userDetails.value?.name);
+    _emailController = TextEditingController(
+        text: _retrieveController.userDetails.value?.email);
+    _phoneNumberController = TextEditingController(
+        text: _retrieveController.userDetails.value?.phoneNumber);
+  }
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _phoneNumberController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,36 +82,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              Obx(
-                () => TextFormField(
-                 
-                  decoration:  InputDecoration(
-                    hintText: _retrieveController.userDetails.value?.name ?? "name",
-                    enabledBorder: const  UnderlineInputBorder(),
-                    focusedBorder: const UnderlineInputBorder(),
-                  ),
+              TextFormField(
+                controller: _fullNameController,
+                decoration: const InputDecoration(
+                  enabledBorder: UnderlineInputBorder(),
+                  focusedBorder: UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 20),
-              Obx(
-                () => TextFormField(
-                 
-                  decoration:  InputDecoration(
-                    hintText:_retrieveController.userDetails.value?.email ?? "email",
-                    enabledBorder:const  UnderlineInputBorder(),
-                    focusedBorder: const UnderlineInputBorder(),
-                  ),
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  enabledBorder: UnderlineInputBorder(),
+                  focusedBorder: UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 20),
-              Obx(
-                () => TextFormField(
-                  
-                  decoration:  InputDecoration(
-                    hintText: _retrieveController.userDetails.value?.phoneNumber ?? "Phone number",
-                    enabledBorder: const UnderlineInputBorder(),
-                    focusedBorder: const UnderlineInputBorder(),
-                  ),
+              TextFormField(
+                controller: _phoneNumberController,
+                decoration: const InputDecoration(
+                  enabledBorder: UnderlineInputBorder(),
+                  focusedBorder: UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 30),

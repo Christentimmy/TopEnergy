@@ -53,7 +53,6 @@ class AuthController extends GetxController {
       isloading.value = false;
     }
   }
-
   Future<void> signUpUser({
     required String fullName,
     required String email,
@@ -93,4 +92,6 @@ class AuthController extends GetxController {
       isloading.value = false;
     }
   }
+
+
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:topenergy/Resources/color.dart';
+import 'package:topenergy/pages/home/alt_profile_screen.dart';
 import 'package:topenergy/pages/home/feedbacks.dart';
 import 'package:topenergy/pages/home/profile.dart';
 import 'package:topenergy/pages/home/security_settings/security_screen.dart';
@@ -36,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ProfileScreen()),
+                      builder: (context) => const AltProfileScreen()),
                 );
               }),
               buildListTile('Security Settings', Icons.security, () {

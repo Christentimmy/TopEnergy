@@ -3,7 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:topenergy/Resources/color.dart';
 import 'package:topenergy/pages/home/buy_electricity.dart';
 import 'package:topenergy/pages/home/homepage.dart';
-import 'package:topenergy/pages/home/menu.dart';
+import 'package:topenergy/pages/home/settings.dart';
 import 'package:topenergy/pages/home/transaction_screen.dart';
 
 class BottomNaviagtionScreen extends StatefulWidget {
